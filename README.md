@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/postgrespro/plantuner.svg?branch=master)](https://travis-ci.org/postgrespro/plantuner)
+[![GitHub license](https://img.shields.io/badge/license-PostgreSQL-blue.svg)](https://raw.githubusercontent.com/postgrespro/jsquery/master/LICENSE)
+
 # Plantuner - enable planner hints
 
    `plantuner` is a contribution module for PostgreSQL 9.5+, which
