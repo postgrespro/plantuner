@@ -1,6 +1,6 @@
-Plantuner - enable planner hints
+# Plantuner - enable planner hints
 
-   contrib/plantuner is a contribution module for PostgreSQL 8.4+, which
+   `plantuner` is a contribution module for PostgreSQL 8.4+, which
    enable planner hints.
 
    All work was done by Teodor Sigaev (teodor@sigaev.ru) and Oleg Bartunov
@@ -8,45 +8,50 @@ Plantuner - enable planner hints
 
    Sponsor: Nomao project (http://www.nomao.com)
 
-Motivation
+## Motivation
 
-   Whether somebody think it's bad or not, but sometime it's very
-   interesting to be able to control planner (provide hints, which tells
-   optimizer to ignore its algorithm in part), which is currently
-   impossible in POstgreSQL. Oracle, for example, has over 120 hints, SQL
-   Server also provides hints.
+Whether somebody think it's bad or not, but sometime it's very
+interesting to be able to control planner (provide hints, which tells
+optimizer to ignore its algorithm in part), which is currently
+impossible in POstgreSQL. Oracle, for example, has over 120 hints, SQL
+Server also provides hints.
 
-   This first version of plantuner provides a possibility to hide
-   specified indexes from PostgreSQL planner, so it will not use them.
+This first version of plantuner provides a possibility to hide
+specified indexes from PostgreSQL planner, so it will not use them.
 
-   There are many situation, when developer want to temporarily disable
-   specific index(es), without dropping them, or to instruct planner to
-   use specific index.
+There are many situation, when developer want to temporarily disable
+specific index(es), without dropping them, or to instruct planner to
+use specific index.
 
-   Next, for some workload PostgreSQL could be too pessimistic for
-   newly created tables and assumes much more rows in table than
-   it actually has. If plantuner.fix_empty_table GUC variable is set
-   to true then module will set to zero number of pages/tuples of
-   table which hasn't blocks in file.
+Next, for some workload PostgreSQL could be too pessimistic for
+newly created tables and assumes much more rows in table than
+it actually has. If plantuner.fix_empty_table GUC variable is set
+to true then module will set to zero number of pages/tuples of
+table which hasn't blocks in file.
 
-Installation
+## Installation
 
-     * Get latest source of plantuner from CVS Repository
-     * gmake && gmake install && gmake installcheck
+Get latest source of plantuner from CVS Repository.
+  
+	gmake && gmake install && gmake installcheck
 
-Syntax
-	plantuner.forbid_index (deprecated)
-	plantuner.disable_index
-		List of indexes invisible to planner
-	plantuner.enable_index
-		List of indexes visible to planner even they are hided
-		by plantuner.disable_index. 
+## Syntax
 
-Usage
+* `plantuner.forbid_index` (deprecated)
+* `plantuner.disable_index`
+	
+	List of indexes invisible to planner
+* `plantuner.enable_index`
+	
+	List of indexes visible to planner even they are hided by plantuner.disable_index. 
 
-   To enable the module you can either load shared library 'plantuner' in
-   psql session or specify 'shared_preload_libraries' option in
-   postgresql.conf.
+## Usage
+
+To enable the module you can either load shared library `plantuner` in
+psql session or specify `shared_preload_libraries` option in
+`postgresql.conf`.
+   
+```
 =# LOAD 'plantuner';
 =# create table test(id int);
 =# create index id_idx on test(id);
@@ -93,4 +98,5 @@ Indexes:
    ->  Bitmap Index Scan on id_idx  (cost=0.00..4.34 rows=12 width=0)
          Index Cond: (id = 1)
 (4 rows)
+```
 
