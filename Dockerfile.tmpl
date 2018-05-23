@@ -7,10 +7,6 @@ RUN if [ "${CHECK_CODE}" = "clang" ] ; then \
 	apk --no-cache add clang-analyzer make musl-dev gcc; \
 	fi
 
-RUN if [ "${CHECK_CODE}" = "cppcheck" ] ; then \
-	apk --no-cache add cppcheck --repository http://dl-cdn.alpinelinux.org/alpine/v3.6/community; \
-	fi
-
 RUN if [ "${CHECK_CODE}" = "false" ] ; then \
 	echo 'http://dl-3.alpinelinux.org/alpine/edge/main' > /etc/apk/repositories; \
 	apk --no-cache add curl python3 gcc make musl-dev;\

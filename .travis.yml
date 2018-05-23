@@ -17,15 +17,9 @@ script:
     - docker-compose run tests
 
 env:
-    - PG_VERSION=9.4 CHECK_CODE=clang
-    - PG_VERSION=9.4 CHECK_CODE=cppcheck
-    - PG_VERSION=9.4 CHECK_CODE=false
     - PG_VERSION=9.5 CHECK_CODE=clang
-    - PG_VERSION=9.5 CHECK_CODE=cppcheck
     - PG_VERSION=9.5 CHECK_CODE=false
     - PG_VERSION=9.6 CHECK_CODE=clang
-    - PG_VERSION=9.6 CHECK_CODE=cppcheck
     - PG_VERSION=9.6 CHECK_CODE=false
     - PG_VERSION=10  CHECK_CODE=clang
-    - PG_VERSION=10  CHECK_CODE=cppcheck
     - PG_VERSION=10  CHECK_CODE=false

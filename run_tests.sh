@@ -16,23 +16,6 @@ status=0
 if [ "$CHECK_CODE" = "clang" ]; then
     scan-build --status-bugs make USE_PGXS=1 || status=$?
     exit $status
-
-elif [ "$CHECK_CODE" = "cppcheck" ]; then
-    cppcheck \
-		--template "{file} ({line}): {severity} ({id}): {message}" \
-        --enable=warning,portability,performance \
-        --suppress=redundantAssignment \
-        --suppress=uselessAssignmentPtrArg \
-		--suppress=literalWithCharPtrCompare \
-        --suppress=incorrectStringBooleanError \
-        --std=c99 *.c 2> cppcheck.log
-
-    if [ -s cppcheck.log ]; then
-        cat cppcheck.log
-        status=1 # error
-    fi
-
-    exit $status
 fi
 
 # don't forget to "make clean"
