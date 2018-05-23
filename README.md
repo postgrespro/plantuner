@@ -31,7 +31,7 @@ table which hasn't blocks in file.
 
 ## Installation
 
-Get latest source of plantuner from CVS Repository.
+Get the latest source code.
   
 	gmake && gmake install && gmake installcheck
 
