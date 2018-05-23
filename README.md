@@ -1,6 +1,6 @@
 # Plantuner - enable planner hints
 
-   `plantuner` is a contribution module for PostgreSQL 8.4+, which
+   `plantuner` is a contribution module for PostgreSQL 9.5+, which
    enable planner hints.
 
    All work was done by Teodor Sigaev (teodor@sigaev.ru) and Oleg Bartunov
