@@ -6,3 +6,4 @@
 *.so
 .deps
 Dockerfile
+*.log
