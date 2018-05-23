@@ -25,7 +25,7 @@ elif [ "$CHECK_CODE" = "cppcheck" ]; then
         --suppress=uselessAssignmentPtrArg \
 		--suppress=literalWithCharPtrCompare \
         --suppress=incorrectStringBooleanError \
-        --std=c89 *.c *.h 2> cppcheck.log
+        --std=c99 *.c 2> cppcheck.log
 
     if [ -s cppcheck.log ]; then
         cat cppcheck.log
