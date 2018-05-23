@@ -32,8 +32,11 @@ table which hasn't blocks in file.
 ## Installation
 
 Get the latest source code.
-  
-	gmake && gmake install && gmake installcheck
+
+	export USE_PGXS=1
+	gmake
+	gmake install
+	gmake installcheck
 
 ## Syntax
 
