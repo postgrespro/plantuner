@@ -1,0 +1,97 @@
+LOAD 'plantuner';
+SET enable_seqscan=off;
+SHOW	plantuner.disable_index;
+ plantuner.disable_index 
+-------------------------
+ 
+(1 row)
+
+CREATE TABLE wow (i int, j int);
+INSERT INTO wow SELECT a, a+ 1 FROM generate_series(1, 1000) a;
+CREATE INDEX i_idx ON wow (i);
+CREATE INDEX j_idx ON wow (j);
+EXPLAIN (COSTS OFF) SELECT count(*) FROM wow;
+               QUERY PLAN               
+----------------------------------------
+ Aggregate
+   ->  Bitmap Heap Scan on wow
+         ->  Bitmap Index Scan on j_idx
+(3 rows)
+
+SELECT count(*) FROM wow;
+ count 
+-------
+  1000
+(1 row)
+
+SET plantuner.disable_index="i_idx, j_idx";
+EXPLAIN (COSTS OFF) SELECT count(*) FROM wow;
+      QUERY PLAN       
+-----------------------
+ Aggregate
+   ->  Seq Scan on wow
+(2 rows)
+
+SELECT count(*) FROM wow;
+ count 
+-------
+  1000
+(1 row)
+
+SHOW plantuner.disable_index;
+  plantuner.disable_index   
+----------------------------
+ public.i_idx, public.j_idx
+(1 row)
+
+SET plantuner.disable_index="i_idx, nonexistent, public.j_idx, wow";
+WARNING:  'nonexistent' does not exist
+WARNING:  'wow' is not an index
+SHOW plantuner.disable_index;
+  plantuner.disable_index   
+----------------------------
+ public.i_idx, public.j_idx
+(1 row)
+
+SET plantuner.enable_index="i_idx";
+SHOW plantuner.enable_index;
+ plantuner.enable_index 
+------------------------
+ public.i_idx
+(1 row)
+
+EXPLAIN (COSTS OFF) SELECT count(*) FROM wow;
+               QUERY PLAN               
+----------------------------------------
+ Aggregate
+   ->  Bitmap Heap Scan on wow
+         ->  Bitmap Index Scan on i_idx
+(3 rows)
+
+SELECT count(*) FROM wow;
+ count 
+-------
+  1000
+(1 row)
+
+DROP INDEX j_idx;
+SELECT pg_reload_conf();
+ pg_reload_conf 
+----------------
+ t
+(1 row)
+
+EXPLAIN (COSTS OFF) SELECT count(*) FROM wow;
+               QUERY PLAN               
+----------------------------------------
+ Aggregate
+   ->  Bitmap Heap Scan on wow
+         ->  Bitmap Index Scan on i_idx
+(3 rows)
+
+SELECT count(*) FROM wow;
+ count 
+-------
+  1000
+(1 row)
+
