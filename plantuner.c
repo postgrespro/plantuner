@@ -39,10 +39,8 @@
 #include <utils/guc.h>
 #include <utils/lsyscache.h>
 #include <utils/memutils.h>
-#include <utils/regproc.h>
 #include <utils/rel.h>
 #include <utils/syscache.h>
-#include <utils/varlena.h>
 
 PG_MODULE_MAGIC;
 
