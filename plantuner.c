@@ -52,10 +52,10 @@ static char	   *disableIndexesOutStr	= "";
 
 static int		nEnabledIndexes			= 0;
 static Oid	   *enabledIndexes			= NULL;
-static char	   *enableIndexesOutStr	= "";
+static char	   *enableIndexesOutStr		= "";
 
-get_relation_info_hook_type prevHook = NULL;
-static bool fix_empty_table = false;
+get_relation_info_hook_type prevHook	= NULL;
+static bool fix_empty_table				= false;
 
 
 static const char *
