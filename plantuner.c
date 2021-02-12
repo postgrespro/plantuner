@@ -45,6 +45,10 @@
 #include <utils/regproc.h>
 #include <utils/varlena.h>
 #endif
+#if PG_VERSION_NUM >= 130000
+#define heap_open table_open
+#define heap_close table_close
+#endif
 
 PG_MODULE_MAGIC;
 
@@ -319,18 +323,6 @@ enabledIndexFilterShow(void)
 void
 _PG_init(void)
 {
-	DefineCustomStringVariable(
-		"plantuner.forbid_index",
-		"List of forbidden indexes (deprecated)",
-		"Listed indexes will not be used in queries (deprecated, use plantuner.disable_index)",
-		&disableIndexesOutStr,
-		"",
-		PGC_USERSET,
-		0,
-		checkDisabledIndexes,
-		assignDisabledIndexes,
-		disabledIndexFilterShow
-	);
 
 	DefineCustomStringVariable(
 		"plantuner.disable_index",
