@@ -7,3 +7,5 @@
 .deps
 Dockerfile
 *.log
+.idea
+regression.*

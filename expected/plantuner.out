@@ -1,4 +1,3 @@
-LOAD 'plantuner';
 SET enable_seqscan=off;
 SHOW	plantuner.disable_index;
  plantuner.disable_index 

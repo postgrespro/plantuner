@@ -36,14 +36,12 @@ table which hasn't blocks in file.
 
 Get the latest source code.
 
-	export USE_PGXS=1
 	gmake
 	gmake install
 	gmake installcheck
 
 ## Syntax
 
-* `plantuner.forbid_index` (deprecated)
 * `plantuner.disable_index`
 	
 	List of indexes invisible to planner
