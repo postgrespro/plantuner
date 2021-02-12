@@ -9,5 +9,14 @@ jobs:
     - name: Checkout repo
       uses: actions/checkout@v2
 
-    - name: Tests
-      run: sudo ./scripts/regression.sh
+    - name: Tests pg-13
+      run: sudo ./scripts/regression.sh 13
+
+    - name: Tests pg-12
+      run: sudo ./scripts/regression.sh 12
+
+    - name: Tests pg-11
+      run: sudo ./scripts/regression.sh 11
+
+    - name: Tests pg-10
+      run: sudo ./scripts/regression.sh 10

@@ -45,9 +45,10 @@
 #include <utils/regproc.h>
 #include <utils/varlena.h>
 #endif
-#if PG_VERSION_NUM >= 130000
-#define heap_open table_open
-#define heap_close table_close
+#if PG_VERSION_NUM >= 120000
+#include <access/table.h>
+#define heap_open(r, l)					table_open(r, l)
+#define heap_close(r, l)				table_close(r, l)
 #endif
 
 PG_MODULE_MAGIC;

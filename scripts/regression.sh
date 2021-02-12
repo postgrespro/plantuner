@@ -13,10 +13,12 @@ export PGUSER=postgres
 export PGDATABASE=postgres
 export PGPORT=5432
 
-apt install -y postgresql-13 postgresql-server-dev-13
-echo 'local all all trust' > /etc/postgresql/13/main/pg_hba.conf
+VER=$1
+
+apt install -y "postgresql-$VER" "postgresql-server-dev-$VER"
+echo 'local all all trust' > "/etc/postgresql/$VER/main/pg_hba.conf"
 /etc/init.d/postgresql start
-export PG_CONFIG=/usr/lib/postgresql/13/bin/pg_config
+export PG_CONFIG="/usr/lib/postgresql/$VER/bin/pg_config"
 make clean && make && make install
 psql -Atc 'alter system set shared_preload_libraries to plantuner'
 /etc/init.d/postgresql restart
